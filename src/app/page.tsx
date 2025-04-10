@@ -1,7 +1,17 @@
-import Image from "next/image";
+import FilledButton from "@/components/FilledButton";
+import OutlinedButton from "@/components/OutlinedButton";
+import TextButton from "@/components/TextButton";
+
 
 export default function Home() {
   return (
+    <>
+      <OutlinedButton>Sign Up</OutlinedButton>
+      <FilledButton>Sign Up</FilledButton>
+      <TextButton>Sign Up</TextButton>
+    </>
+  );
+  /* return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
@@ -99,5 +109,5 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  );
+  ); */
 }
