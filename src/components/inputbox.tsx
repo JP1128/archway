@@ -1,3 +1,5 @@
+//general inputbox
+
 import React from 'react';
 
 // Props definition for the InputBox component
