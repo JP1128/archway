@@ -1,4 +1,4 @@
-// This is a  input box for login forms
+// This is an input box for login
 // - Displays a label (optional, passed via props)
 // - Automatically shows a "show/hide password" eye icon when type is "password"
 

@@ -1,4 +1,4 @@
-// This is an input box for search.
+// This is an input box for search
 // - No label by default
 // - Always displays a search icon on the left
 // - Placeholder text is customizable (default is “Search”)

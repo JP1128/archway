@@ -1,4 +1,4 @@
-//general inputbox
+//This iss a general inputbox
 
 import React from 'react';
 
