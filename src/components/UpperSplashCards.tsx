@@ -1,4 +1,4 @@
-// Upper section for splash page
+// Upper section for splash page.
 // Responsive layout: column on small screens, row on medium+ screens (1:1)
 // Left: title, description, signup button with vw-based scaling
 // right: 16:9 video box with centered text and custom SVG play button inside
