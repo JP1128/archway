@@ -8,7 +8,7 @@ const cardData = [
 
 export default function SplashCards() {
   return (
-    <div className="flex flex-col items-center py-12 px-4 bg-black text-white">
+    <div className="flex flex-col items-center py-12 px-4 bg-white text-black">
       <h2 className="text-3xl font-bold text-center mb-12">
         ARCHWAY fosters connection <br /> and a sense of community
       </h2>
@@ -18,11 +18,11 @@ export default function SplashCards() {
         {cardData.slice(0, 2).map((card, index) => (
           <div
             key={index}
-            className="bg-white text-black rounded-lg shadow-lg p-4 w-52 flex flex-col items-center"
+            className="bg-white text-black rounded-lg shadow-lg p-4 w-52 flex flex-col items-start"
           >
             <div className="w-full h-24 bg-gradient-to-br from-red-300 to-red-600 rounded-md mb-3" />
             <h3 className="font-bold">{card.title}</h3>
-            <p className="text-sm text-gray-600 text-center">{card.desc}</p>
+            <p className="text-sm text-gray-600">{card.desc}</p>
           </div>
         ))}
       </div>
@@ -32,11 +32,11 @@ export default function SplashCards() {
         {cardData.slice(2, 4).map((card, index) => (
           <div
             key={index + 2}
-            className="bg-white text-black rounded-lg shadow-lg p-4 w-52 flex flex-col items-center"
+            className="bg-white text-black rounded-lg shadow-lg p-4 w-52 flex flex-col items-start"
           >
             <div className="w-full h-24 bg-gradient-to-br from-red-300 to-red-600 rounded-md mb-3" />
             <h3 className="font-bold">{card.title}</h3>
-            <p className="text-sm text-gray-600 text-center">{card.desc}</p>
+            <p className="text-sm text-gray-600">{card.desc}</p>
           </div>
         ))}
       </div>
