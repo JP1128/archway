@@ -1,11 +1,11 @@
 // src/components/MiddleSplashCards.tsx
 
 const cardTop = [
-    { title: "Post Articles", desc: "Description paragraph (TBD)" },
+    { title: "Master Your Academic Life", desc: "From course planning to exam prep, Archway brings together the insights students wish they had sooner. You can explore or contribute to class guides that break down what to expect, who to take, and how to survive both core and major classes. Find registration tips to help you beat the system (legally) and actually get the classes you want. Discover upperclassmen-approved study spots—hidden campus gems with strong Wi-Fi, reliable charging ports, and the quiet you didn’t know you needed. Whether you’re navigating your first semester or planning your final year, Archway helps you stay ahead—without the stress." },
 ];
 
 const cardBottom = [
-    { title: "Categorize Articles", desc: "Description paragraph (TBD)" },
+    { title: "Thrive Beyond the Classroom", desc: "UGA isn’t just about grades–it’s about growing, connecting, and making it count. Archway points you to essential campus resources like mental health services, tutoring, and financial support, while also helping you find your people through clubs, events, and student orgs. You’ll get everyday hacks for surviving (and thriving in) student life—think meal plan tips, bus routes decoded, and laundry room strategies. But it doesn’t stop at campus. Discover the city of Athens: its cozy coffee shops, local music scene, farmers markets, and hidden study spots off the beaten path. Being a student here is more than just showing up to class—it’s about building a life that feels like yours." },
 ];
   
 export default function MiddleSplashCards() {
