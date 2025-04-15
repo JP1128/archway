@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 const FilledButton: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -9,3 +11,4 @@ const FilledButton: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 };
 
 export default FilledButton;
+
