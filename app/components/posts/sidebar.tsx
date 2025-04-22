@@ -40,7 +40,7 @@ const topics = [
     name: "Technology",
   },
   {
-    href: "/posts/topic/utensils",
+    href: "/posts/topic/foods",
     icon: Utensils,
     name: "Foods",
   },

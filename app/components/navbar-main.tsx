@@ -12,10 +12,9 @@ import {
 } from "flowbite-react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { Loader } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import PostCreateModal from "./posts/post-create-modal";
 
@@ -30,8 +29,6 @@ function AuthenticatedNavbar({ user }) {
     router.push("/");
   }
 
-  console.log(user.image);
-
   return (
     <Navbar fluid>
       <NavbarBrand href="/">
@@ -39,8 +36,9 @@ function AuthenticatedNavbar({ user }) {
           ARCHWAY
         </span>
       </NavbarBrand>
+      <div></div>
       <div className="flex items-center gap-3 lg:order-2">
-        {pathname != "/posts" && (
+        {!pathname.match("/posts/*") && (
           <Link
             key="posts"
             href="/posts"

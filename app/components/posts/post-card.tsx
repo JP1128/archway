@@ -5,7 +5,7 @@ import Image from "next/image";
 export interface PostCardProps {
   post_id: string;
   thumnail_src: string;
-  tag: string;
+  topic: string;
   title: string;
   description: string;
   author: string;
@@ -14,8 +14,8 @@ export interface PostCardProps {
 
 export default function PostCard({
   post_id,
-  thumnail_src = "https://birejeyjfeqjibpq.public.blob.vercel-storage.com/placeholder-0mHyvQBnOcM4NsEpOrZzpOa3bP2x6b.png",
-  tag,
+  thumnail_src,
+  topic,
   title,
   description,
   author,
@@ -23,22 +23,24 @@ export default function PostCard({
 }: PostCardProps) {
   return (
     <Card className="[&>div]:p-5">
-      <Link href={`/posts/${post_id}`}>
+      <Link href={`/posts/${post_id}/view`} className="relative h-40">
         <Image
           className="rounded-lg"
           src={thumnail_src}
-          width={600}
-          height={300}
+          layout="fill"
+          style={{
+            objectFit: "fill",
+          }}
           alt={`Thumnail for ${title}`}
         />
       </Link>
       <span>
-        <Badge color="purple" className="inline">
-          {tag}
+        <Badge color="gray" className="inline">
+          {topic}
         </Badge>
       </span>
       <h2 className="-my-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        <Link href={`/posts/${post_id}`}>{title}</Link>
+        <Link href={`/posts/${post_id}/view`}>{title}</Link>
       </h2>
       <p className="text-gray-500 dark:text-gray-400">{description}</p>
       <div className="flex items-center space-x-4">

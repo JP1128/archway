@@ -1,23 +1,18 @@
 "use client";
 
-import {
-  Button,
-  Label,
-  Modal,
-  ModalBody,
-  Select,
-  Textarea,
-  TextInput,
-} from "flowbite-react";
-import { CloudUpload, Plus } from "lucide-react";
-import { FormEvent, useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import ContentEditor from "./editor";
+import { PostDocument } from "@/models/Post";
 import { useSession } from "next-auth/react";
+import { CloudUpload, Loader } from "lucide-react";
+import { Button, Label, Select, Textarea, TextInput } from "flowbite-react";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function PostCreateModal() {
-  const { data: session } = useSession();
+export default function ArticleEdit({ id }) {
+  const { data: session, status } = useSession();
 
-  const [openModal, setOpenModal] = useState(false);
+  const [post, setPost] = useState<PostDocument>();
 
   const [form, setForm] = useState({
     title: "",
@@ -27,6 +22,15 @@ export default function PostCreateModal() {
 
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState<string>("");
+
+  async function onSelectFile(event) {
+    if (!event.target.files || event.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+
+    setSelectedFile(event.target.files[0]);
+  }
 
   useEffect(() => {
     if (!selectedFile) {
@@ -39,6 +43,22 @@ export default function PostCreateModal() {
 
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
+
+  useEffect(() => {
+    fetch(`/api/posts/${id}`, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPost(data);
+        setForm({
+          title: data.title,
+          description: data.description,
+          topic: data.topic,
+        });
+        setPreview(data.thumnail);
+      });
+  }, [id]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -71,24 +91,17 @@ export default function PostCreateModal() {
     }
   }
 
-  async function onSelectFile(event) {
-    if (!event.target.files || event.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
-    }
-
-    setSelectedFile(event.target.files[0]);
+  if (!post) {
+    return (
+      <Loader className="m-4 flex w-full animate-spin flex-row justify-center" />
+    );
   }
 
   return (
-    <>
-      <Button onClick={() => setOpenModal(true)}>
-        <Plus className="mr-2" />
-        Create Post
-      </Button>
-      <Modal onClose={() => setOpenModal(false)} show={openModal}>
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-10 dark:bg-gray-800">
-          <form onSubmit={handleSubmit}>
+    <div className="m-auto flex flex-row gap-5">
+      <form onSubmit={handleSubmit}>
+        <div className="m-auto flex flex-row gap-5">
+          <div className="w-md rounded-lg border-2 border-gray-200 p-5">
             <div className="mb-4 grid gap-4 sm:grid-cols-2">
               <div className="mb-4 sm:col-span-2">
                 <div className="flex w-full items-center justify-center">
@@ -191,20 +204,19 @@ export default function PostCreateModal() {
                 />
               </div>
             </div>
-            <div className="flex flex-row space-x-3">
-              <Button type="submit">Create new post</Button>
-              <Button
-                className="bg-gray-400 hover:bg-gray-800"
-                onClick={() => {
-                  return setOpenModal(false);
-                }}
+            <div className="flex flex-row items-center space-x-3">
+              <Button type="submit">Save</Button>
+              <Link
+                href={`/posts/${id}/view`}
+                className="text-primary-700 font-medium hover:underline"
               >
-                Discard
-              </Button>
+                Go back
+              </Link>
             </div>
-          </form>
-        </ModalBody>
-      </Modal>
-    </>
+          </div>
+          <ContentEditor defaultHtml={post.content} />
+        </div>
+      </form>
+    </div>
   );
 }
