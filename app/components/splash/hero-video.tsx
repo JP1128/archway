@@ -18,10 +18,10 @@ export default function HeroVideo() {
           </p>
           <div className="flex w-fit items-center gap-5">
             <Link
-              href="/signup"
+              href="/posts"
               className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 mr-2 rounded-lg px-4 py-2 text-sm font-medium text-white focus:ring-4 focus:outline-none lg:px-5 lg:py-2.5"
             >
-              Get started
+              Explore now!
             </Link>
           </div>
         </div>
