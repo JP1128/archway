@@ -1,3 +1,12 @@
+Group Name: JP's Bus
+Group Members: Esther Cho, Joshua Kim, JP Park, Grace Ryoo
+
+Project Name: Archway
+Project Description: Archway is a collaborative platform designed for UGA students to create and share Wiki-style guides on college life. Whether it’s navigating registration, finding hidden study spots, or mastering campus parking hacks, Archway empowers students to share tips and tricks to make college easier for one another. 
+
+
+--------------
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
