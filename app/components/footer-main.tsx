@@ -23,6 +23,9 @@ export function MainFooter() {
           <FooterLink href="/" className="mr-4 hover:underline md:mr-6">
             Home
           </FooterLink>
+          <FooterLink href="/login" className="mr-4 hover:underline md:mr-6">
+            Login
+          </FooterLink>
           <FooterLink href="/signup" className="mr-4 hover:underline md:mr-6">
             Register
           </FooterLink>

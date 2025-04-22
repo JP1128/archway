@@ -1,31 +1,50 @@
 "use client";
 
-// import { register } from "@/lib/actions";
-import { Button, Checkbox, Label, Select, TextInput } from "flowbite-react";
+import { signIn } from "next-auth/react";
+import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { TriangleAlert } from "lucide-react";
 
 export function LogInForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  //   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-  //     event.preventDefault();
+  const [pending, setPending] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
-  //     try {
-  //       const formData = new FormData(event.currentTarget);
-  //       const response = await register(formData);
+  const router = useRouter();
 
-  //       if (response?.error) {
-  //         console.log(response.error);
-  //       }
-  //     } catch (error) {
-  //       console.log("Error while executing handleSubmit(event) in SignUpForm", error);
-  //     }
-  //   }
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setPending(true);
+    setError("");
+
+    try {
+      const response = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (response?.error) {
+        setError(response.error as string);
+      } else {
+        router.push("/posts");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    setPending(false);
+  }
 
   return (
-    <form className="w-xl max-w-md space-y-4 md:space-y-6 xl:max-w-xl">
+    <form
+      onSubmit={handleSubmit}
+      className="w-xl max-w-md space-y-4 md:space-y-6 xl:max-w-xl"
+    >
       <h1 className="mb-5 text-xl leading-tight font-bold tracking-tight text-gray-900 sm:text-2xl dark:text-white">
         Welcome Back!
       </h1>
@@ -42,6 +61,7 @@ export function LogInForm() {
           name="email"
           placeholder="john.smith@gmail.com"
           value={email}
+          disabled={pending}
           onChange={(event) => setEmail(event.target.value)}
           type="email"
           required
@@ -60,6 +80,7 @@ export function LogInForm() {
           name="password"
           placeholder="•••••••••"
           value={password}
+          disabled={pending}
           type="password"
           onChange={(event) => setPassword(event.target.value)}
           required
@@ -88,7 +109,7 @@ export function LogInForm() {
         </Link>
       </div>
 
-      <Button type="submit" className="w-full">
+      <Button type="submit" disabled={pending} className="w-full">
         Sign in to account
       </Button>
 
@@ -101,6 +122,13 @@ export function LogInForm() {
           Sign up
         </Link>
       </p>
+
+      {error && (
+        <div className="flex flex-row items-end space-x-2">
+          <TriangleAlert className="h-5 w-5 text-red-600" />{" "}
+          <p className="mt-1 ml-1 text-sm font-medium text-red-600">{error}</p>
+        </div>
+      )}
     </form>
   );
 }

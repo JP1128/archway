@@ -1,4 +1,4 @@
-import ContentSection from "../components/splash/ccontent-section";
+import ContentSection from "../components/splash/content-section";
 import CtaSection from "../components/splash/cta-section";
 import HeroVideo from "../components/splash/hero-video";
 

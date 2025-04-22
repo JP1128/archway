@@ -1,37 +1,69 @@
 "use client";
 
-// import { register } from "@/lib/actions";
+import { register } from "@/lib/actions";
 import { Button, Checkbox, Label, Select, TextInput } from "flowbite-react";
+import { TriangleAlert } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export function SignUpForm() {
-  const [fullname, setFullname] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [major, setMajor] = useState<string>("");
-  const [year, setYear] = useState<string>("freshman");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [form, setForm] = useState({
+    fullname: "",
+    email: "",
+    major: "",
+    year: "freshman",
+    password: "",
+    confirmPassword: "",
+  });
 
   const [error, setError] = useState<string>("");
+  const [pending, setPending] = useState<boolean>(false);
 
-  //   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-  //     event.preventDefault();
+  const router = useRouter();
 
-  //     try {
-  //       const formData = new FormData(event.currentTarget);
-  //       const response = await register(formData);
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setPending(true);
 
-  //       if (response?.error) {
-  //         console.log(response.error);
-  //       }
-  //     } catch (error) {
-  //       console.log("Error while executing handleSubmit(event) in SignUpForm", error);
-  //     }
-  //   }
+    if (!validatePassword(form.password, form.confirmPassword)) return;
+
+    try {
+      const formData = new FormData(event.currentTarget);
+      const response = await register(formData);
+
+      if (response?.error) {
+        setError(response.error);
+      } else {
+        router.push("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    setPending(false);
+  }
+
+  function validatePassword(password: string, confirmPassword: string) {
+    if (confirmPassword && password != confirmPassword) {
+      setError("Passwords must match");
+      return false;
+    }
+
+    if (confirmPassword.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return false;
+    }
+
+    setError("");
+    return true;
+  }
 
   return (
-    <form className="w-xl max-w-md space-y-4 md:space-y-6 xl:max-w-xl">
+    <form
+      onSubmit={handleSubmit}
+      className="w-xl max-w-md space-y-4 md:space-y-6 xl:max-w-xl"
+    >
       <h1 className="mb-5 text-xl leading-tight font-bold tracking-tight text-gray-900 sm:text-2xl dark:text-white">
         Start Here!
       </h1>
@@ -49,8 +81,11 @@ export function SignUpForm() {
             id="fullname"
             name="fullname"
             placeholder="John Smith"
-            value={fullname}
-            onChange={(event) => setFullname(event.target.value)}
+            value={form.fullname}
+            disabled={pending}
+            onChange={(event) =>
+              setForm({ ...form, fullname: event.target.value })
+            }
             required
           />
         </div>
@@ -66,8 +101,11 @@ export function SignUpForm() {
             id="email"
             name="email"
             placeholder="john.smith@gmail.com"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            value={form.email}
+            disabled={pending}
+            onChange={(event) =>
+              setForm({ ...form, email: event.target.value })
+            }
             type="email"
             required
           />
@@ -84,8 +122,11 @@ export function SignUpForm() {
             id="major"
             name="major"
             placeholder="Computer Science"
-            value={major}
-            onChange={(event) => setMajor(event.target.value)}
+            value={form.major}
+            disabled={pending}
+            onChange={(event) =>
+              setForm({ ...form, major: event.target.value })
+            }
             required
           />
         </div>
@@ -100,8 +141,9 @@ export function SignUpForm() {
           <Select
             id="year"
             name="year"
-            value={year}
-            onChange={(event) => setYear(event.target.value)}
+            value={form.year}
+            disabled={pending}
+            onChange={(event) => setForm({ ...form, year: event.target.value })}
             required
           >
             <option value="freshman">Freshman</option>
@@ -123,21 +165,16 @@ export function SignUpForm() {
             id="password"
             name="password"
             placeholder="•••••••••"
-            value={password}
+            value={form.password}
+            disabled={pending}
             type="password"
             onChange={(event) => {
               const newPassword = event.target.value;
-              setPassword(newPassword);
-
-              if (confirmPassword && confirmPassword != newPassword) {
-                setError("Passwords must match");
-              } else {
-                setError("");
-              }
+              setForm({ ...form, password: newPassword });
+              validatePassword(newPassword, form.confirmPassword);
             }}
             required
           />
-          {error && <p className="mt-1 ml-1 text-sm text-red-600">{error}</p>}
         </div>
 
         <div>
@@ -151,17 +188,13 @@ export function SignUpForm() {
             id="confirm-password"
             name="confirm-password"
             placeholder="•••••••••"
-            value={confirmPassword}
+            value={form.confirmPassword}
+            disabled={pending}
             type="password"
             onChange={(event) => {
               const newPassword = event.target.value;
-              setConfirmPassword(newPassword);
-
-              if (password != newPassword) {
-                setError("Passwords must match");
-              } else {
-                setError("");
-              }
+              setForm({ ...form, confirmPassword: newPassword });
+              validatePassword(form.password, newPassword);
             }}
             required
           />
@@ -194,7 +227,7 @@ export function SignUpForm() {
         </div>
       </div>
 
-      <Button type="submit" className="w-full">
+      <Button type="submit" disabled={pending} className="w-full">
         Create an account
       </Button>
 
@@ -207,6 +240,13 @@ export function SignUpForm() {
           Login here
         </Link>
       </p>
+
+      {error && (
+        <div className="flex flex-row items-end space-x-2">
+          <TriangleAlert className="h-5 w-5 text-red-600" />{" "}
+          <p className="mt-1 ml-1 text-sm font-medium text-red-600">{error}</p>
+        </div>
+      )}
     </form>
   );
 }
