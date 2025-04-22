@@ -1,3 +1,4 @@
+import { Provider } from "@/components/provider";
 import { ThemeModeScript } from "flowbite-react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -26,14 +27,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <ThemeModeScript />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <Provider>
+        <head>
+          <ThemeModeScript />
+        </head>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </Provider>
     </html>
   );
 }

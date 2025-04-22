@@ -48,3 +48,15 @@ export async function register(formData: FormData) {
     console.log("Error occured during register(formData)", error);
   }
 }
+
+export async function getUser(email: string) {
+  try {
+    await connectDB();
+    const userFound = await User.findOne({ email });
+    if (!userFound) return null;
+
+    return userFound;
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -1,8 +1,5 @@
-"use client";
-
 import { Badge, Card } from "flowbite-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export interface PostCardProps {
@@ -37,7 +34,7 @@ export default function PostCard({
       </Link>
       <span>
         <Badge color="purple" className="inline">
-          asd
+          {tag}
         </Badge>
       </span>
       <h2 className="-my-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

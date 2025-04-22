@@ -1,13 +1,36 @@
 "use client";
 
-import { Navbar, NavbarBrand, NavbarToggle } from "flowbite-react";
-import { SessionProvider, useSession } from "next-auth/react";
+import {
+  Avatar,
+  Dropdown,
+  DropdownHeader,
+  DropdownItem,
+  Navbar,
+  NavbarBrand,
+  NavbarToggle,
+  theme,
+} from "flowbite-react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { twMerge } from "tailwind-merge";
+import PostCreateModal from "./posts/post-create-modal";
 
-function AuthenticatedNavbar() {
-  const path = usePathname();
+function AuthenticatedNavbar({ user }) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  async function handleSignOut() {
+    await signOut({
+      redirect: false,
+    });
+    router.push("/");
+  }
+
+  console.log(user.image);
 
   return (
     <Navbar fluid>
@@ -17,15 +40,46 @@ function AuthenticatedNavbar() {
         </span>
       </NavbarBrand>
       <div className="flex items-center gap-3 lg:order-2">
-        <Link
-          key="posts"
-          href="/posts"
-          color="gray"
-          className="hover:text-primary-800 mr-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-800 lg:px-5 lg:py-2.5"
+        {pathname != "/posts" && (
+          <Link
+            key="posts"
+            href="/posts"
+            color="gray"
+            className="hover:text-primary-800 mr-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-800 lg:px-5 lg:py-2.5"
+          >
+            Go to application
+          </Link>
+        )}
+        {pathname == "/posts" && <PostCreateModal />}
+        <Dropdown
+          arrowIcon={false}
+          inline
+          label={
+            <Avatar
+              img={user.image}
+              className="border-1 border-gray-500"
+              rounded
+            />
+          }
+          theme={{
+            floating: {
+              base: twMerge(theme.dropdown.floating.base, "w-56"),
+            },
+          }}
         >
-          Go to application
-        </Link>
-        ,
+          <DropdownHeader>
+            <span className="block truncate text-sm font-medium text-gray-500 dark:text-gray-400">
+              {user.email}
+            </span>
+          </DropdownHeader>
+          <DropdownItem
+            className="bg-gray-100 font-bold text-gray-500 dark:text-gray-400"
+            onClick={handleSignOut}
+          >
+            Logout
+          </DropdownItem>
+        </Dropdown>
+
         <NavbarToggle theme={{ icon: "h-5 w-5 shrink-0" }} />
       </div>
     </Navbar>
@@ -85,19 +139,23 @@ function UnauthenticatedNavbar() {
 function SessionManagedNavbar() {
   const { data: session, status } = useSession();
 
-  if (status === "loading" || !session?.user) {
+  if (status === "loading") {
+    return (
+      <Loader className="m-4 flex w-full animate-spin flex-row justify-center" />
+    );
+  }
+
+  if (!session?.user) {
     return <UnauthenticatedNavbar />;
   }
 
-  return <AuthenticatedNavbar />;
+  return <AuthenticatedNavbar user={session.user} />;
 }
 
 export function MainNavbar() {
   return (
-    <SessionProvider>
-      <header className="border-b border-gray-200">
-        <SessionManagedNavbar />
-      </header>
-    </SessionProvider>
+    <header className="border-b border-gray-200">
+      <SessionManagedNavbar />
+    </header>
   );
 }

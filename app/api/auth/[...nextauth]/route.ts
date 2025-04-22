@@ -1,10 +1,11 @@
-import NextAuth from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import credentials from "next-auth/providers/credentials";
 
 import bcrypt from "bcryptjs";
 
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
+import createUserAvatar from "@/lib/avatar";
 
 const handler = NextAuth({
   session: {
@@ -12,6 +13,23 @@ const handler = NextAuth({
   },
   pages: {
     signIn: "/login",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+
+      return token;
+    },
+    async session({ session }) {
+      const avatar = createUserAvatar(session.user.name);
+
+      return {
+        user: { ...session.user, image: avatar.toDataUri() },
+        expires: session.expires,
+      } satisfies Session;
+    },
   },
   providers: [
     credentials({

@@ -29,7 +29,7 @@ export function LogInForm() {
       });
 
       if (response?.error) {
-        setError(response.error as string);
+        setError("Wrong password!");
       } else {
         router.push("/posts");
       }
