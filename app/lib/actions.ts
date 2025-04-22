@@ -126,3 +126,43 @@ export async function createPost(formData: FormData) {
     console.log(error);
   }
 }
+const UpdatePostSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  thumbnail: z.string(),
+  topic: z.string(),
+  author: z.string(),
+  content: z.string(),
+});
+
+export async function updatePost(formData: FormData) {
+  const { id, title, description, thumbnail, topic, author, content } =
+    UpdatePostSchema.parse({
+      id: formData.get("id"),
+      title: formData.get("title"),
+      description: formData.get("description"),
+      thumbnail: formData.get("thumbnail"),
+      topic: formData.get("topic"),
+      author: formData.get("author"),
+      content: formData.get("content"),
+    });
+
+  try {
+    await connectDB();
+    const response = await Post.updateOne(
+      { _id: id },
+      {
+        title,
+        description,
+        thumbnail,
+        topic,
+        author,
+        content,
+      },
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

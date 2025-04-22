@@ -13,6 +13,7 @@ import { CloudUpload, Plus } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function PostCreateModal() {
   const { data: session } = useSession();
@@ -27,6 +28,8 @@ export default function PostCreateModal() {
 
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState<string>("");
+
+  const router = useRouter();
 
   useEffect(() => {
     if (!selectedFile) {
@@ -64,6 +67,8 @@ export default function PostCreateModal() {
         });
 
         if (createPostResponse.ok) {
+          const { post_id } = await createPostResponse.json();
+          router.push(`/posts/${post_id}/edit`);
         }
       }
     } catch (error) {

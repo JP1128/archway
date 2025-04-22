@@ -1,4 +1,4 @@
-import { createPost, getPosts } from "@/lib/actions";
+import { createPost, getPosts, updatePost } from "@/lib/actions";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -16,5 +16,14 @@ export async function POST(request: Request) {
   return NextResponse.json({
     msg: "success",
     post_id: response.id,
+  });
+}
+
+export async function UPDATE(request: Request) {
+  const form = await request.formData();
+  const response = await updatePost(form);
+
+  return NextResponse.json({
+    msg: "success",
   });
 }

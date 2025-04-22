@@ -56,7 +56,8 @@ export default function PostView({ id }) {
                     {author.fullname}
                   </p>
                   <p className="text-base text-gray-500 dark:text-gray-400">
-                    {author.email}
+                    {author.email} - {author.major} -{" "}
+                    {author.year.toWellFormed()}
                   </p>
                   <p className="text-base text-gray-500 dark:text-gray-400">
                     {post.createdAt.toString()}

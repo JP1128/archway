@@ -18,6 +18,7 @@ export default function ArticleEdit({ id }) {
     title: "",
     description: "",
     topic: "",
+    content: "",
   });
 
   const [selectedFile, setSelectedFile] = useState();
@@ -55,6 +56,7 @@ export default function ArticleEdit({ id }) {
           title: data.title,
           description: data.description,
           topic: data.topic,
+          content: data.content,
         });
         setPreview(data.thumnail);
       });
@@ -76,10 +78,11 @@ export default function ArticleEdit({ id }) {
 
         formData.append("thumbnail", url);
         formData.append("author", session.user.email);
-        formData.append("content", "");
+        formData.append("content", form.content);
+        formData.append("id", id);
 
         const createPostResponse = await fetch("/api/posts", {
-          method: "POST",
+          method: "UPDATE",
           body: formData,
         });
 
@@ -214,7 +217,12 @@ export default function ArticleEdit({ id }) {
               </Link>
             </div>
           </div>
-          <ContentEditor defaultHtml={post.content} />
+          <ContentEditor
+            content={form.content}
+            setContent={(event) =>
+              setForm({ ...form, content: event.target.value })
+            }
+          />
         </div>
       </form>
     </div>
