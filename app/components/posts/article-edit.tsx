@@ -43,30 +43,19 @@ export default function ArticleEdit({ id }) {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    formData.append("author", session.user.email);
+    formData.append("content", form.content);
+    formData.append("id", id);
 
     try {
-      const response = await fetch("/api/upload", {
+      const createPostResponse = await fetch("/api/posts", {
         method: "PUT",
         body: formData,
       });
 
-      if (response.ok) {
-        const body = await response.json();
-        const { url } = body;
-
-        formData.append("author", session.user.email);
-        formData.append("content", form.content);
-        formData.append("id", id);
-
-        const createPostResponse = await fetch("/api/posts", {
-          method: "PUT",
-          body: formData,
-        });
-
-        if (createPostResponse.ok) {
-          console.log("Success!");
-          router.push(`/posts/${id}/view`);
-        }
+      if (createPostResponse.ok) {
+        console.log("Success!");
+        router.push(`/posts/${id}/view`);
       }
     } catch (error) {
       console.log(error);
