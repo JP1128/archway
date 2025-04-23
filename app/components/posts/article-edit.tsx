@@ -58,7 +58,7 @@ export default function ArticleEdit({ id }) {
           topic: data.topic,
           content: data.content,
         });
-        setPreview(data.thumnail);
+        setPreview(data.thumbnail);
       });
   }, [id]);
 
@@ -82,11 +82,12 @@ export default function ArticleEdit({ id }) {
         formData.append("id", id);
 
         const createPostResponse = await fetch("/api/posts", {
-          method: "UPDATE",
+          method: "PUT",
           body: formData,
         });
 
         if (createPostResponse.ok) {
+          console.log("Success!");
         }
       }
     } catch (error) {

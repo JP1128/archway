@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   });
 }
 
-export async function UPDATE(request: Request) {
+export async function PUT(request: Request) {
   const form = await request.formData();
   const response = await updatePost(form);
 

@@ -130,7 +130,7 @@ const UpdatePostSchema = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string(),
-  thumbnail: z.string(),
+  thumbnail: z.optional(z.string()),
   topic: z.string(),
   author: z.string(),
   content: z.string(),
@@ -161,6 +161,16 @@ export async function updatePost(formData: FormData) {
         content,
       },
     );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deletePost(id: string) {
+  try {
+    await connectDB();
+    const response = await Post.deleteOne({ _id: id });
     return response;
   } catch (error) {
     console.log(error);
