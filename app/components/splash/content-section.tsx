@@ -3,21 +3,21 @@ import Image from "next/image";
 
 const items = [
   {
-    imgSrc: "/placeholder_3.png",
+    imgSrc: "/memphis3b.png",
     imgAlt: "Placeholder 3",
     title: "First Card",
     description:
       "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
   },
   {
-    imgSrc: "/placeholder_4.png",
+    imgSrc: "/memphis4b.jpg",
     imgAlt: "Placeholder 4",
     title: "Second Card",
     description:
       "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
   },
   {
-    imgSrc: "/placeholder_5.png",
+    imgSrc: "/memphis5b.png",
     imgAlt: "Placeholder 5",
     title: "Third Card",
     description:
