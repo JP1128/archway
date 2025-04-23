@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import ContentEditor from "./editor";
 import { PostDocument } from "@/models/Post";
 import { useSession } from "next-auth/react";
-import { CloudUpload, Loader } from "lucide-react";
+import { CloudUpload, Loader, Trash2 } from "lucide-react";
 import { Button, Label, Select, Textarea, TextInput } from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ArticleEdit({ id }) {
   const { data: session, status } = useSession();
@@ -23,6 +24,8 @@ export default function ArticleEdit({ id }) {
 
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState<string>("");
+
+  const router = useRouter();
 
   async function onSelectFile(event) {
     if (!event.target.files || event.target.files.length === 0) {
@@ -89,6 +92,23 @@ export default function ArticleEdit({ id }) {
         if (createPostResponse.ok) {
           console.log("Success!");
         }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleDelete(event) {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(`/api/posts/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        console.log("Success!");
+        router.push("/posts");
       }
     } catch (error) {
       console.log(error);
@@ -210,6 +230,13 @@ export default function ArticleEdit({ id }) {
             </div>
             <div className="flex flex-row items-center space-x-3">
               <Button type="submit">Save</Button>
+              <Button
+                type="button"
+                onClick={handleDelete}
+                className="text-primary-800 bg-fit hover:bg-primary-800 w-fit border-2 hover:text-white"
+              >
+                <Trash2 className="h-5 w-5" />
+              </Button>
               <Link
                 href={`/posts/${id}/view`}
                 className="text-primary-700 font-medium hover:underline"
