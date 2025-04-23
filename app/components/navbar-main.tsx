@@ -53,11 +53,17 @@ function AuthenticatedNavbar({ user }) {
           arrowIcon={false}
           inline
           label={
-            <Avatar
-              img={user.image}
-              className="border-1 border-gray-500"
-              rounded
-            />
+            <div className="flex flex-row items-center gap-2">
+              <div className="font-medium text-gray-700">
+                Welcome, {user.email}
+              </div>
+
+              <Avatar
+                img={user.image}
+                className="border-1 border-gray-500"
+                rounded
+              />
+            </div>
           }
           theme={{
             floating: {

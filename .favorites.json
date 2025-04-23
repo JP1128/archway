@@ -1,0 +1,98 @@
+[
+    {
+        "type": "Group",
+        "name": "pages",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "Y1xJz5o3E0y4BDaO"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\posts",
+        "parent_id": "Y1xJz5o3E0y4BDaO",
+        "fsPath": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\posts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "poinAg97jQFCdrVO"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\favicon.ico",
+        "parent_id": "Y1xJz5o3E0y4BDaO",
+        "fsPath": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\favicon.ico",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "a06Cbp154nJHPGhl"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\globals.css",
+        "parent_id": "Y1xJz5o3E0y4BDaO",
+        "fsPath": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\globals.css",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "wlaOY3JhqTmEFpdH"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\layout.tsx",
+        "parent_id": "Y1xJz5o3E0y4BDaO",
+        "fsPath": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\layout.tsx",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "g5O3unQqF6ZRMzhB"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\middleware.ts",
+        "parent_id": "Y1xJz5o3E0y4BDaO",
+        "fsPath": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\middleware.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "veaPwzxjAb7YFJEM"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\not-found.tsx",
+        "parent_id": "Y1xJz5o3E0y4BDaO",
+        "fsPath": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\not-found.tsx",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "9ZaEyiKX2VdJfWen"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\(authentication)",
+        "parent_id": "Y1xJz5o3E0y4BDaO",
+        "fsPath": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\(authentication)",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "HTahVob1W43BQ2gZ"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\(splash)",
+        "parent_id": "Y1xJz5o3E0y4BDaO",
+        "fsPath": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\(splash)",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "31Blp7Z2tvWkXyid"
+    },
+    {
+        "type": "Group",
+        "name": "apis",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "YHRptj9vZNf0yBlr"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\api",
+        "parent_id": "YHRptj9vZNf0yBlr",
+        "fsPath": "c:\\Users\\jp100\\Desktop\\csci4300\\archway\\app\\api",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "t7bSjEJgRGTDMH0X"
+    }
+]

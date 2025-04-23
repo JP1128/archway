@@ -60,7 +60,7 @@ export default function MainSidebar() {
   return (
     <Sidebar
       aria-label="Default side navigation"
-      className="fixed left-0 z-40 h-full w-64 border-r border-gray-200 [&_*]:font-medium [&>div]:bg-white [&>div]:p-0"
+      className="fixed left-0 z-40 h-full w-64 rounded-xl border border-gray-200 [&_*]:font-medium [&>div]:bg-white [&>div]:p-0"
     >
       <div className="h-full p-5">
         <SidebarItems>
