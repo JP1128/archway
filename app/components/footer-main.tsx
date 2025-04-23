@@ -16,8 +16,7 @@ export function MainFooter() {
           </span>
         </FooterBrand>
         <p className="my-6 text-gray-500 dark:text-gray-400">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet
-          consectetur adipiscing elit quisque faucibus.
+        Archway — more than just a platform. It’s The DawgHouse, built by students, for students.
         </p>
         <FooterLinkGroup className="mb-6 flex flex-wrap items-center justify-center text-base text-gray-900 dark:text-white">
           <FooterLink href="/" className="mr-4 hover:underline md:mr-6">

@@ -3,25 +3,25 @@ import Image from "next/image";
 
 const items = [
   {
-    imgSrc: "/placeholder_3.png",
+    imgSrc: "/memphis3b.png",
     imgAlt: "Placeholder 3",
-    title: "First Card",
+    title: "Post your knowledge",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
+      "Share your own experiences, advice, or class breakdowns. Whether it's how you survived Organic Chemistry or a guide to the best spots for studying, your insights can help another Dawg thrive.",
   },
   {
-    imgSrc: "/placeholder_4.png",
+    imgSrc: "/memphis4b.jpg",
     imgAlt: "Placeholder 4",
-    title: "Second Card",
+    title: "Find your community",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
+      "Looking for your people? From major-specific groups to hobby-based clubs, Archway connects you with organizations and events to find your niche.",
   },
   {
-    imgSrc: "/placeholder_5.png",
+    imgSrc: "/memphis5b.png",
     imgAlt: "Placeholder 5",
-    title: "Third Card",
+    title: "Ace it all",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
+      "College life is full of unspoken rules. Archway helps you navigate them - from choosing the right meal plan to mastering campus shortcuts. It’s the stuff no one tells you, but everyone wishes they knew.",
   },
 ];
 

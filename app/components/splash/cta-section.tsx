@@ -6,7 +6,7 @@ export default function CtaSection() {
       <div className="mx-auto max-w-screen-xl space-y-12 px-4 py-8 sm:py-16 lg:space-y-20 lg:px-6">
         <div className="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
           <Image
-            src="/placeholder_1.png"
+            src="/memphis1.jpg"
             alt="Placeholder image 1"
             width={1000}
             height={1000}
@@ -51,7 +51,7 @@ export default function CtaSection() {
             </p>
           </div>
           <Image
-            src="/placeholder_2.png"
+            src="/memphis2.jpg"
             alt="Placeholder image 2"
             width={1000}
             height={1000}
