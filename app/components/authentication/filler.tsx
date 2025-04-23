@@ -12,9 +12,7 @@ export default function Filler() {
           Dawgs to Dawgs
         </h1>
         <p className="text-primary-200 mb-4 lg:mb-8">
-          Millions of designers and agencies around the world showcase their
-          portfolio work on Flowbite - the home to the world’s best design and
-          creative professionals.
+        Archway is your guide to thriving at UGA. Discover, share, and connect with fellow students.
         </p>
       </div>
     </div>
