@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function ArticleEdit({ id }) {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const [post, setPost] = useState<PostDocument>();
 
@@ -22,31 +22,7 @@ export default function ArticleEdit({ id }) {
     content: "",
   });
 
-  const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState<string>("");
-
   const router = useRouter();
-
-  async function onSelectFile(event) {
-    if (!event.target.files || event.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
-    }
-
-    setSelectedFile(event.target.files[0]);
-  }
-
-  useEffect(() => {
-    if (!selectedFile) {
-      setPreview("");
-      return;
-    }
-
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreview(objectUrl);
-
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedFile]);
 
   useEffect(() => {
     fetch(`/api/posts/${id}`, {
@@ -61,7 +37,6 @@ export default function ArticleEdit({ id }) {
           topic: data.topic,
           content: data.content,
         });
-        setPreview(data.thumbnail);
       });
   }, [id]);
 
@@ -79,7 +54,6 @@ export default function ArticleEdit({ id }) {
         const body = await response.json();
         const { url } = body;
 
-        formData.append("thumbnail", url);
         formData.append("author", session.user.email);
         formData.append("content", form.content);
         formData.append("id", id);
@@ -91,6 +65,7 @@ export default function ArticleEdit({ id }) {
 
         if (createPostResponse.ok) {
           console.log("Success!");
+          router.push(`/posts/${id}/view`);
         }
       }
     } catch (error) {
@@ -133,34 +108,16 @@ export default function ArticleEdit({ id }) {
                     htmlFor="file"
                     className="flex h-42 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   >
-                    {selectedFile ? (
+                    {post.thumbnail && (
                       <div className="relative h-full w-full">
                         <Image
-                          src={preview}
+                          src={post.thumbnail}
                           alt="Selected file"
                           layout="fill"
                           style={{ objectFit: "contain" }}
                         />
                       </div>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <CloudUpload className="mb-3 h-10 w-10 text-gray-400" />
-                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                          <span className="font-semibold">
-                            Click to upload thumnail
-                          </span>
-                        </p>
-                      </div>
                     )}
-
-                    <input
-                      id="file"
-                      name="file"
-                      type="file"
-                      className="hidden"
-                      onChange={onSelectFile}
-                      required
-                    />
                   </Label>
                 </div>
               </div>

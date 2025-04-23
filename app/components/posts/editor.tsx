@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import DefaultEditor, { EditorProvider } from "react-simple-wysiwyg";
 import styles from "./article-view.module.css";
 
