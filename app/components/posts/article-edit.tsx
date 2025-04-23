@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function ArticleEdit({ id }) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const [post, setPost] = useState<PostDocument>();
 
@@ -23,6 +23,18 @@ export default function ArticleEdit({ id }) {
   });
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      if (post && session.user.email != post.author) {
+        router.push("/posts");
+      }
+    }
+
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  });
 
   useEffect(() => {
     fetch(`/api/posts/${id}`, {
@@ -79,7 +91,7 @@ export default function ArticleEdit({ id }) {
     }
   }
 
-  if (!post) {
+  if (!post || status === "loading") {
     return (
       <Loader className="m-4 flex w-full animate-spin flex-row justify-center" />
     );
